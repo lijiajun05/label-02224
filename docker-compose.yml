@@ -1,0 +1,17 @@
+services:
+  # 前端应用
+  frontend:
+    build:
+      context: ./frontend-user
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

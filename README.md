@@ -2,6 +2,19 @@
 
 基于 Vue3 + TailwindCSS 构建的天气日历应用，融合日历、黄历和实时天气三大功能。采用自然禅意的设计风格，以柔和自然色系营造宁静致远的氛围。
 
+## 工程结构变更
+
+为了支持 Docker 容器化部署，项目新增了以下文件：
+
+```
+.
+├── docker-compose.yml      # Docker Compose 配置文件
+└── frontend-user/
+    └── Dockerfile          # 前端应用 Dockerfile
+```
+
+这些变更不会影响原有的本地开发流程，同时提供了一键部署的能力。
+
 ## 项目结构
 
 ```
@@ -72,6 +85,55 @@ cd frontend-user
 npm run lint      # ESLint 检查
 npm run format    # Prettier 格式化
 ```
+
+## Docker 部署
+
+### 环境要求
+
+- Docker Engine 20.10.0+
+- Docker Compose 2.0.0+
+
+### 一键启动
+
+在项目根目录执行以下命令即可一键启动项目：
+
+```bash
+# 构建并启动容器
+docker-compose up -d
+```
+
+应用将在 http://localhost 访问。
+
+### 常用 Docker Compose 命令
+
+```bash
+# 查看容器状态
+docker-compose ps
+
+# 查看容器日志
+docker-compose logs -f
+
+# 停止并移除容器
+docker-compose down
+
+# 重新构建镜像（代码更新后使用）
+docker-compose up -d --build
+```
+
+### Docker 配置说明
+
+#### Dockerfile
+- 使用 `node:20.10.0-alpine3.19` 作为构建阶段基础镜像（具体版本号确保可复现性）
+- 使用 npm ci 安装依赖以确保版本一致性
+- 构建生产版本后使用 `nginx:1.25.3-alpine3.18` 作为运行阶段镜像
+- 暴露 80 端口提供 HTTP 服务
+
+#### docker-compose.yml
+- 定义前端服务（frontend）
+- 使用 Compose 文件格式版本 3（无需显式指定 version 字段）
+- 容器重启策略为 unless-stopped
+- 使用自定义网络 app-network 隔离服务
+- 将容器内 80 端口映射到主机 80 端口
 
 ## Services
 
