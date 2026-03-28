@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Noto Sans SC', 'Source Han Sans CN', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-zen-cream text-zen-gray-600 antialiased;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* 响应式基础字体大小 - Responsive base font size */
+  /* 需求 5.2: 手机端紧凑布局 */
+  @media (max-width: 767px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  /* 需求 5.1: 平板端最优布局 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    html {
+      font-size: 16px;
+    }
+  }
+
+  /* 需求 5.3: 桌面端宽屏布局 */
+  @media (min-width: 1024px) {
+    html {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer components {
+  /* 禅意卡片样式 - Zen card with soft shadow and blur */
+  .zen-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-zen shadow-zen;
+    @apply transition-shadow duration-300 ease-out;
+  }
+
+  .zen-card:hover {
+    @apply shadow-zen-md;
+  }
+
+  /* 禅意内容区块卡片 - Inner section card */
+  .zen-section-card {
+    @apply bg-zen-cream-50/70 rounded-lg;
+    @apply px-3 py-2.5;
+    @apply border border-zen-gray-200/40;
+    @apply transition-all duration-200 ease-out;
+  }
+
+  /* 禅意按钮样式 */
+  .zen-btn {
+    @apply px-4 py-2 rounded-zen transition-all duration-200 ease-out;
+    @apply hover:shadow-zen-md active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-zen-blue-300 focus:ring-offset-1;
+  }
+
+  .zen-btn-primary {
+    @apply zen-btn bg-zen-blue text-white;
+    @apply hover:bg-zen-blue-400;
+  }
+
+  .zen-btn-secondary {
+    @apply zen-btn bg-zen-cream text-zen-gray-600;
+    @apply hover:bg-zen-cream-300;
+  }
+
+  /* 禅意文本样式 */
+  .zen-title {
+    font-family: 'Noto Serif SC', 'Source Han Serif CN', serif;
+    @apply text-zen-gray-600 font-medium;
+    letter-spacing: 0.02em;
+  }
+
+  /* 响应式容器 - Responsive container */
+  .zen-container {
+    @apply w-full mx-auto px-4;
+  }
+
+  /* 手机端 (<768px) */
+  @media (max-width: 767px) {
+    .zen-container {
+      @apply px-3;
+    }
+  }
+
+  /* 平板端 (768px-1024px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .zen-container {
+      @apply px-6 max-w-3xl;
+    }
+  }
+
+  /* 桌面端 (>1024px) */
+  @media (min-width: 1024px) {
+    .zen-container {
+      @apply px-8 max-w-5xl;
+    }
+  }
+
+  /* 大屏桌面端 (>1280px) */
+  @media (min-width: 1280px) {
+    .zen-container {
+      @apply max-w-6xl;
+    }
+  }
+}
+
+@layer utilities {
+  /* 卷轴展开动画 */
+  .scroll-unfold {
+    animation: scrollUnfold 0.5s ease-out;
+  }
+
+  /* 柔和过渡 */
+  .zen-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* 响应式间距工具类 - Responsive spacing utilities */
+  .responsive-gap {
+    @apply gap-2;
+  }
+
+  @media (min-width: 768px) {
+    .responsive-gap {
+      @apply gap-4;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .responsive-gap {
+      @apply gap-6;
+    }
+  }
+
+  /* 响应式文本工具类 - Responsive text utilities */
+  .text-responsive-sm {
+    @apply text-xs;
+  }
+
+  .text-responsive-base {
+    @apply text-sm;
+  }
+
+  .text-responsive-lg {
+    @apply text-base;
+  }
+
+  .text-responsive-xl {
+    @apply text-lg;
+  }
+
+  @media (min-width: 768px) {
+    .text-responsive-sm {
+      @apply text-sm;
+    }
+
+    .text-responsive-base {
+      @apply text-base;
+    }
+
+    .text-responsive-lg {
+      @apply text-lg;
+    }
+
+    .text-responsive-xl {
+      @apply text-xl;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-responsive-lg {
+      @apply text-xl;
+    }
+
+    .text-responsive-xl {
+      @apply text-2xl;
+    }
+  }
+
+  /* 安全区域适配 - Safe area insets for notched devices */
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* 横屏模式优化 - Landscape mode optimization */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .landscape-compact {
+      @apply py-2;
+    }
+  }
+
+  /* 柔和交互反馈 - Soft interaction feedback (需求 4.5) */
+  .zen-interactive {
+    @apply transition-all duration-200 ease-out;
+    @apply hover:brightness-105;
+    @apply active:scale-[0.97];
+  }
+
+  /* 禅意分隔线 */
+  .zen-divider {
+    @apply border-zen-gray-200/50;
+  }
+}

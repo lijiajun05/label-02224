@@ -1,0 +1,7 @@
+# 组件目录
+# 存放 Vue 组件文件
+# - CalendarView.vue
+# - CalendarCell.vue
+# - AlmanacDrawer.vue
+# - WeatherBackground.vue
+# - ParticleCanvas.vue
