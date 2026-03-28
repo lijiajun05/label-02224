@@ -26,3 +26,7 @@ frontend-user/tsconfig.tsbuildinfo
 *.njsproj
 *.sln
 *.sw?
+
+# Docker
+.dockerignore
+docker-compose.override.yml
