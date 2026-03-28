@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: ./frontend-user
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    container_name: zen-calendar-frontend

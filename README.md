@@ -8,7 +8,9 @@
 .
 ├── README.md                 # 项目文档
 ├── .gitignore               # Git 忽略配置
+├── docker-compose.yml       # Docker Compose 配置文件
 └── frontend-user/           # 前端代码目录
+    ├── Dockerfile           # Docker 镜像构建文件
     ├── index.html           # 入口 HTML
     ├── package.json         # 项目依赖
     ├── vite.config.ts       # Vite 配置
@@ -31,8 +33,13 @@
 
 ### 环境要求
 
+#### 本地开发环境
 - Node.js >= 18.0.0
 - npm >= 9.0.0
+
+#### Docker 部署环境
+- Docker 20.10+
+- Docker Compose 2.0+
 
 ### 本地开发
 
@@ -63,6 +70,61 @@ npm run build
 ```bash
 cd frontend-user
 npm run preview
+```
+
+### Docker Compose 一键部署
+
+#### 启动服务
+
+```bash
+# 在项目根目录执行
+docker-compose up -d
+```
+
+服务启动后，访问 http://localhost
+
+#### 查看日志
+
+```bash
+# 查看服务日志
+docker-compose logs -f frontend
+```
+
+#### 停止服务
+
+```bash
+# 停止服务但保留容器
+docker-compose stop
+
+# 停止并删除容器、网络
+docker-compose down
+
+# 停止并删除容器、网络、镜像
+docker-compose down --rmi all
+```
+
+#### 重新构建镜像
+
+当代码发生变化时，需要重新构建镜像：
+
+```bash
+# 重新构建镜像并启动
+docker-compose up -d --build
+```
+
+### Docker 手动部署（不使用 Compose）
+
+#### 构建镜像
+
+```bash
+cd frontend-user
+docker build -t zen-calendar-frontend .
+```
+
+#### 运行容器
+
+```bash
+docker run -d -p 80:80 --name zen-calendar-frontend zen-calendar-frontend
 ```
 
 ### 代码检查与格式化
